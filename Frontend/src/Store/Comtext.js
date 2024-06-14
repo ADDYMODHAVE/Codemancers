@@ -12,8 +12,11 @@ const ContextProvider = (props) => {
     axios
       .post(UserApis.login, userInfo)
       .then((res) => {
+        console.log(res.data);
         if (res.data.status === "Invalid password") {
           seterror("Invalid password");
+        } else if (res.data.status === "User not found") {
+          seterror("User not found");
         } else {
           const { admin, email, token } = res.data;
           localStorage.setItem("token", token);
